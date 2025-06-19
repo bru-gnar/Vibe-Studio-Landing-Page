@@ -6,6 +6,7 @@ import { ppEditorialNewUltralightItalic, inter } from "./fonts"
 import Link from "next/link"
 import Navigation from "@/components/Navigation"
 import BrandCarousel from "@/components/BrandCarousel"
+import InteractiveGallery from "@/components/InteractiveGallery"
 import FeatureCard from "@/components/FeatureCard"
 import Footer from "@/components/Footer"
 import OptimizedVideo from "@/components/OptimizedVideo"
@@ -119,46 +120,19 @@ export default function Home() {
       {/* Brand Carousel */}
       <BrandCarousel />
 
-      {/* Features Section */}
-      <section id="explore" className="py-24 px-4 md:px-8 max-w-7xl mx-auto">
-        <div className="text-center mb-16">
-          <h2
-            className={`${ppEditorialNewUltralightItalic.className} text-4xl md:text-6xl font-light italic text-white/80 tracking-tighter mb-6`}
-          >
-            Craft Your Vision
-          </h2>
-          <p className={`${inter.className} text-white/50 text-lg max-w-2xl mx-auto`}>
-            Powerful tools to bring your creative ideas to life with precision and style
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          <FeatureCard
-            title="Imagine"
-            description="Kick off your creative flow with concept tools that help you brainstorm, storyboard, and explore visual directions."
-            videoSrc="https://static.cdn-luma.com/files/58ab7363888153e3/WebGL%20Exported%20(1).mp4"
-          />
-          <FeatureCard
-            title="Build"
-            description="Use node-based control and custom templates to design, animate, and edit with precision."
-            videoSrc="https://static.cdn-luma.com/files/58ab7363888153e3/Jitter%20Exported%20Poster.mp4"
-          />
-          <FeatureCard
-            title="Refine"
-            description="Polish your project with guided adjustments, alternate cuts, and intelligent enhancements."
-            videoSrc="https://static.cdn-luma.com/files/58ab7363888153e3/Exported%20Web%20Video.mp4"
-          />
-        </div>
+      {/* Interactive Gallery - Moodboard Section */}
+      <section id="moodboard" className="relative">
+        <InteractiveGallery />
       </section>
 
-      {/* Showcase Section */}
-      <section className="py-24 px-4 md:px-8 bg-black/30">
+      {/* Features Section */}
+      <section id="featured" className="py-24 px-4 md:px-8 bg-black/30">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <h2
               className={`${ppEditorialNewUltralightItalic.className} text-4xl md:text-6xl font-light italic text-white/80 tracking-tighter mb-6`}
             >
-              Featured Projects
+              Features
             </h2>
             <p className={`${inter.className} text-white/50 text-lg max-w-2xl mx-auto`}>
               Explore what's possible with Vibe Studio
@@ -195,6 +169,38 @@ export default function Home() {
               </div>
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* Craft Your Vision Section */}
+      <section id="craft-vision" className="py-24 px-4 md:px-8 max-w-7xl mx-auto">
+        <div className="text-center mb-16">
+          <h2
+            className={`${ppEditorialNewUltralightItalic.className} text-4xl md:text-6xl font-light italic text-white/80 tracking-tighter mb-6`}
+          >
+            Craft Your Vision
+          </h2>
+          <p className={`${inter.className} text-white/50 text-lg max-w-2xl mx-auto`}>
+            Powerful tools to bring your creative ideas to life with precision and style
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <FeatureCard
+            title="Imagine"
+            description="Kick off your creative flow with concept tools that help you brainstorm, storyboard, and explore visual directions."
+            videoSrc="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/social___bruner___A_surreal_cinematic_scene_of_a_man_in_a_sharp_blac_2e4bd350-8459-451d-8aaf-eb8e001217b7_2-snZtjy3Sdh8CJd5wd418IyPir9oaii.mp4"
+          />
+          <FeatureCard
+            title="Build"
+            description="Use node-based control and custom templates to design, animate, and edit with precision."
+            videoSrc="https://static.cdn-luma.com/files/58ab7363888153e3/Jitter%20Exported%20Poster.mp4"
+          />
+          <FeatureCard
+            title="Refine"
+            description="Polish your project with guided adjustments, alternate cuts, and intelligent enhancements."
+            videoSrc="https://static.cdn-luma.com/files/58ab7363888153e3/Exported%20Web%20Video.mp4"
+          />
         </div>
       </section>
 

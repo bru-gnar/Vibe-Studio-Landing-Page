@@ -23,6 +23,27 @@ export default function Navigation() {
     return () => window.removeEventListener("scroll", handleScroll)
   }, [scrolled])
 
+  const smoothScrollTo = (elementId: string) => {
+    const element = document.getElementById(elementId)
+    if (element) {
+      const headerOffset = 80 // Account for fixed header height
+      const elementPosition = element.getBoundingClientRect().top
+      const offsetPosition = elementPosition + window.pageYOffset - headerOffset
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth",
+      })
+    }
+    // Close mobile menu if open
+    setMobileMenuOpen(false)
+  }
+
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, sectionId: string) => {
+    e.preventDefault()
+    smoothScrollTo(sectionId)
+  }
+
   return (
     <motion.header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
@@ -39,10 +60,16 @@ export default function Navigation() {
 
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center space-x-8">
-          <NavLink href="/features">Features</NavLink>
-          <NavLink href="/showcase">Showcase</NavLink>
+          <NavLink href="#moodboard" onClick={(e) => handleNavClick(e, "moodboard")}>
+            Showcase
+          </NavLink>
+          <NavLink href="#featured" onClick={(e) => handleNavClick(e, "featured")}>
+            Features
+          </NavLink>
+          <NavLink href="#craft-vision" onClick={(e) => handleNavClick(e, "craft-vision")}>
+            About
+          </NavLink>
           <NavLink href="/pricing">Pricing</NavLink>
-          <NavLink href="/about">About</NavLink>
           <Link
             href="/login"
             className="px-5 py-2 border border-white/30 rounded-full text-white hover:bg-white/10 transition-all duration-300"
@@ -52,7 +79,11 @@ export default function Navigation() {
         </nav>
 
         {/* Mobile Menu Button */}
-        <button className="md:hidden text-white" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
+        <button
+          className="md:hidden text-white"
+          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
+        >
           {mobileMenuOpen ? (
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -97,17 +128,17 @@ export default function Navigation() {
           exit={{ opacity: 0, height: 0 }}
         >
           <div className="px-4 py-5 space-y-4">
-            <MobileNavLink href="/features" onClick={() => setMobileMenuOpen(false)}>
+            <MobileNavLink href="#moodboard" onClick={(e) => handleNavClick(e, "moodboard")}>
+              Showcase
+            </MobileNavLink>
+            <MobileNavLink href="#featured" onClick={(e) => handleNavClick(e, "featured")}>
               Features
             </MobileNavLink>
-            <MobileNavLink href="/showcase" onClick={() => setMobileMenuOpen(false)}>
-              Showcase
+            <MobileNavLink href="#craft-vision" onClick={(e) => handleNavClick(e, "craft-vision")}>
+              About
             </MobileNavLink>
             <MobileNavLink href="/pricing" onClick={() => setMobileMenuOpen(false)}>
               Pricing
-            </MobileNavLink>
-            <MobileNavLink href="/about" onClick={() => setMobileMenuOpen(false)}>
-              About
             </MobileNavLink>
             <div className="pt-2">
               <Link
@@ -125,15 +156,31 @@ export default function Navigation() {
   )
 }
 
-function NavLink({ href, children }: { href: string; children: React.ReactNode }) {
+function NavLink({
+  href,
+  children,
+  onClick,
+}: {
+  href: string
+  children: React.ReactNode
+  onClick?: (e: React.MouseEvent<HTMLAnchorElement>) => void
+}) {
   return (
-    <Link href={href} className="text-white/70 hover:text-white transition-colors duration-300">
+    <Link href={href} className="text-white/70 hover:text-white transition-colors duration-300" onClick={onClick}>
       {children}
     </Link>
   )
 }
 
-function MobileNavLink({ href, onClick, children }: { href: string; onClick: () => void; children: React.ReactNode }) {
+function MobileNavLink({
+  href,
+  onClick,
+  children,
+}: {
+  href: string
+  onClick: (e: React.MouseEvent<HTMLAnchorElement>) => void
+  children: React.ReactNode
+}) {
   return (
     <Link
       href={href}
